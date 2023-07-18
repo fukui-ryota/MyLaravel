@@ -12,7 +12,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts=Post::orderBy('created_at','desc')->get();
+        $user=auth()->user();
+        return view('post.index', compact('posts', 'user'));
     }
 
     /**
@@ -34,8 +36,8 @@ class PostController extends Controller
             'image'=>'image|max:1024'
         ]);
         $post=new Post();
-       $post->title=$inputs['title'];
-       $post->body=$inputs['body'];
+        $post->title=$inputs['title'];
+        $post->body=$inputs['body'];
         $post->user_id=auth()->user()->id;
 
         if (request('image')){
