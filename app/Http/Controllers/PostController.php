@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Nice;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -56,7 +57,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('post.show', compact('post'));
+        $request=request();
+        $ip = $request->ip();
+        $nice=Nice::where('post_id', $post->id)->where('ip', $ip)->first();
+        return view('post.show', compact('post', 'nice'));
     }
 
     /**

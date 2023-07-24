@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             投稿の個別表示
         </h2>
         <x-validation-errors class="mb-4" :errors="$errors" />
@@ -25,7 +25,6 @@
                             <x-primary-button class="bg-red-700 float-right ml-4" onClick="return confirm('本当に削除しますか？');">削除</x-primary-button>
                         </form>
                     </div>
-
                     <div>
                         <p class="mt-4 text-gray-600 py-4 whitespace-pre-line">{{$post->body}}</p>
                         @if($post->image)
@@ -34,6 +33,31 @@
                             </div>
                             <img src="{{ asset('storage/images/'.$post->image)}}" class="mx-auto" style="height:300px;">
                         @endif
+                        
+                        <span>
+                            <img src="{{asset("logo/nicebutton.png")}}" width="30px">
+
+                            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
+                            @if($nice)
+                            <!-- 「いいね」取消用ボタンを表示 -->
+                                <a href="{{ route('unnice', $post) }}" class="btn btn-success btn-sm">
+                                    いいね
+                                    <!-- 「いいね」の数を表示 -->
+                                    <span class="badge">
+                                        {{ $post->nices->count() }}
+                                    </span>
+                                </a>
+                            @else
+                            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                                <a href="{{ route('nice', $post) }}" class="btn btn-secondary btn-sm">
+                                    いいね
+                                    <!-- 「いいね」の数を表示 -->
+                                    <span class="badge">
+                                        {{ $post->nices->count() }}
+                                    </span>
+                                </a>
+                            @endif
+                            </span>
                         <div class="text-sm font-semibold flex flex-row-reverse">
                             <p> {{ $post->user->name}} • {{$post->created_at->diffForHumans()}}</p>
                         </div>

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             投稿の編集画面
         </h2>
 
@@ -16,17 +16,17 @@
                 @method('patch')
                 <div class="md:flex items-center mt-8">
                     <div class="w-full flex flex-col">
-                    <label for="body" class="font-semibold leading-none mt-4">件名</label>
-                    <input type="text" name="title" class="w-auto py-2 border border-gray-300 rounded-md" id="title" value="{{old('title', $post->title)}}" placeholder="Enter Title">
+                    <label for="body" class="font-semibold leading-none mt-4 text-white">件名</label>
+                    <input type="text" name="title" class="w-auto py-2 border border--gray300 rounded-md" id="title" value="{{old('title', $post->title)}}" placeholder="Enter Title">
                     </div>
                 </div>
 
                 <div class="w-full flex flex-col">
-                    <label for="body" class="font-semibold leading-none mt-4">本文</label>
+                    <label for="body" class="font-semibold leading-none mt-4 text-white">本文</label>
                     <textarea name="body" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="10">{{old('body', $post->body)}}</textarea>
                 </div>
 
-                <div class="w-full flex flex-col">
+                <div class="w-full flex flex-col text-white">
                     @if($post->image)
                         <div>
                             (画像ファイル：{{$post->image}})

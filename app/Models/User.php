@@ -16,6 +16,10 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function nices() {
+        return $this->hasMany('App\Models\Nice');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
